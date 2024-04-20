@@ -22,8 +22,16 @@ function RecentlyGeneratedReports() {
         return new Date(year, month - 1, day, adjustHours, minutes)
     };
 
-    const shortedReport = [...Report].sort((b,a) => {
-        
+    const currentDate = new Date(); 
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(currentDate.getDate() - 30);
+
+    const shortedReport = Report
+        .filter(item => {
+        const date = parseDate(item.date, item.time);
+        return date >= thirtyDaysAgo && date <= currentDate;
+        })
+        .sort((b,a) => {
         const dateB = parseDate(b.date, b.time);
         const dateA = parseDate(a.date, a.time);
 
