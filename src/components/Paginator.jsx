@@ -18,7 +18,7 @@ function Paginator({totalPages,
     }
 
   return (
-    <div className='w-full h-[80px] text-slate-800 flex justify-center gap-6 items-center border-t-[1.5px]'>
+    <div className='w-full h-[80px] text-slate-800 flex justify-center gap-6 items-center border-t-[1.5px] max-sm:gap-3'>
 
         <div>
             {
@@ -29,11 +29,11 @@ function Paginator({totalPages,
             }
         </div>
 
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-row gap-4 max-sm:gap-1'>
             {   
                 visiblePageNumbers.map((pageNumber) => (
                     <div key={pageNumber}>
-                        <button className={`px-4 py-2 rounded-md border-[2px]
+                        <button className={`px-4 py-2 rounded-md border-[2px] max-sm:px-3 max-sm:py-1
                                 ${pageNumber === currentPage ? 'bg-orange-600 text-white' : ''}`}
                                 onClick={() => handleJumpToPage(pageNumber)}
                                 disabled={pageNumber === currentPage}>
@@ -53,9 +53,9 @@ function Paginator({totalPages,
             }
         </div>
 
-        <div>
-            <label htmlFor="itemsPerPage">Rows Per Page:</label>
-                <select className='px-3  py-2 border rounded-md ml-2' 
+        <div className='max-sm:flex items-center'>
+            <label className='text-sm' htmlFor="itemsPerPage">Rows Per Page:</label>
+                <select className='px-3 py-2 border rounded-md ml-2 max-sm:px-2' 
                         id="itemsPerPage" 
                         value={itemPerPage}
                         onChange={handelChangeItemPerPage}>
