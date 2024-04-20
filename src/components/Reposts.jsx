@@ -4,6 +4,10 @@ import { Report } from '@/data'
 import { BsFillFileEarmarkArrowDownFill } from "react-icons/bs";
 import Link from 'next/link';
 import Paginator from './Paginator';
+import { BiFilterAlt } from "react-icons/bi";
+import { RxCross2 } from "react-icons/rx";
+
+
 
 function RecentlyGeneratedReports() {
 
@@ -74,8 +78,15 @@ function RecentlyGeneratedReports() {
     <div className='flex justify-center rounded-2xl my-2 bg-white mx-3 text-slate-900 max-sm:mx-0' >
         <div className='w-[100%] h-full'>
 
-            <div className='flex justify-center mt-4 font-semibold text-xl'>
-            <p>Recently Generated Reports</p>
+            <div className='flex justify-around mt-4 font-semibold text-xl items-center'>
+
+                <div></div>
+                <p>Recently Generated Reports</p>
+                <div className='flex gap-3 flex-row'>
+                    <button className='px-2 py-1 rounded-lg border-[2px]'><BiFilterAlt size={27}/></button>
+                    <button className='px-2 py-1 rounded-lg border-[2px]'><RxCross2 size={27}/></button>
+                </div>
+           
             </div>
             
             <div className='flex justify-between items-center mt-6 py-2 bg-slate-200 w-full text-lg font-semibold'>
