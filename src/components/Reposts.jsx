@@ -1,9 +1,14 @@
-import React from 'react'
+'use client';
+import React, { useState } from 'react'
 import { Report } from '@/data'
 import { BsFillFileEarmarkArrowDownFill } from "react-icons/bs";
 import Link from 'next/link';
+import Paginator from './Paginator';
 
-function RecentlyGeneratedRepost() {
+function RecentlyGeneratedReports() {
+
+    const [currentPage , setCurrentPage] = useState(1);
+    const itemPerPage = 6;
 
     
     const parseDate = (dateStr , timeStr) => {
@@ -25,6 +30,36 @@ function RecentlyGeneratedRepost() {
 
     });
 
+    
+    const indexOfLastItem = currentPage * itemPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemPerPage;
+    const currentData = shortedReport.slice(indexOfFirstItem , indexOfLastItem);
+    const totalPages = Math.ceil(shortedReport.length / itemPerPage);
+
+    const handleNextPage = () => {
+        setCurrentPage((prevPage  => prevPage + 1))
+    }
+    const handlePrevPage = () => {
+        setCurrentPage((prevPage  => prevPage - 1))
+    }
+
+    const handleJumpToPage = (page) => {
+        setCurrentPage(page);
+    };
+
+    const getPageRange = (currentPage, totalPages) => {
+        const rangeSize = 3; 
+        let startPage = Math.max(1, currentPage - Math.floor(rangeSize / 2));
+        let endPage = Math.min(totalPages, startPage + rangeSize - 1);
+
+        if (endPage - startPage + 1 < rangeSize) {
+            startPage = Math.max(1, endPage - rangeSize + 1);
+        }
+
+        return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
+    };
+
+    const visiblePageNumbers = getPageRange(currentPage, totalPages);
 
   return (
     <div className='flex justify-center rounded-2xl my-2 bg-white mx-3 text-slate-900 max-sm:mx-0' >
@@ -43,7 +78,7 @@ function RecentlyGeneratedRepost() {
             </div>
 
             {
-                shortedReport.map((data , index)=>(
+                currentData.map((data , index)=>(
                     <div key={index} className='flex justify-between items-center mt-8 py-2 w-full text-sm '>
                         <div className='flex ml-8 w-[85%] max-sm:ml-2 max-sm:gap-5'>
                             <div className='w-[25%]'>
@@ -62,9 +97,19 @@ function RecentlyGeneratedRepost() {
                 ))
             }
 
+            <div className='px-6 py-2 text-white'>
+                <Paginator  totalPages={totalPages} 
+                            onPageChangeNext={handleNextPage} 
+                            onPageChangePrev={handlePrevPage} 
+                            currentPage={currentPage}
+                            visiblePageNumbers={visiblePageNumbers}
+                            handleJumpToPage={handleJumpToPage}
+                            
+                            />
+            </div>
         </div>
     </div>
   )
 }
 
-export default RecentlyGeneratedRepost
+export default RecentlyGeneratedReports
