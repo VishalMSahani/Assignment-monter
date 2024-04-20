@@ -1,7 +1,7 @@
 export const Report = [
     {
       "report": "Sales_Report_Q1.pdf",
-      "date": "19-04-2024",
+      "date": "19-01-2024",
       "time": "10:30 AM",
       "file_url": "http://example.com/reports/sales_report_q1.pdf"
     },
@@ -13,7 +13,7 @@ export const Report = [
     },
     {
       "report": "Inventory_Status.xlsx",
-      "date": "17-04-2024",
+      "date": "17-05-2024",
       "time": "09:00 AM",
       "file_url": "http://example.com/reports/inventory_status.xlsx"
     },
