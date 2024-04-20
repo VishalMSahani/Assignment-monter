@@ -8,7 +8,8 @@ import Paginator from './Paginator';
 function RecentlyGeneratedReports() {
 
     const [currentPage , setCurrentPage] = useState(1);
-    const itemPerPage = 6;
+    const [itemPerPage , setItemPerPage] =useState(6)
+
 
     
     const parseDate = (dateStr , timeStr) => {
@@ -104,7 +105,8 @@ function RecentlyGeneratedReports() {
                             currentPage={currentPage}
                             visiblePageNumbers={visiblePageNumbers}
                             handleJumpToPage={handleJumpToPage}
-                            
+                            filterPage={setItemPerPage}
+                            itemPerPage={itemPerPage}
                             />
             </div>
         </div>

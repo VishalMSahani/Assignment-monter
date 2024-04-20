@@ -8,7 +8,14 @@ function Paginator({totalPages,
                     currentPage,
                     onPageChangePrev,
                     visiblePageNumbers,
-                    handleJumpToPage }) {
+                    handleJumpToPage,
+                    filterPage,
+                    itemPerPage}) {
+
+    const handelChangeItemPerPage = (e) =>{
+        const newItem = parseInt(e.target.value)
+        filterPage(newItem)
+    }
 
   return (
     <div className='w-full h-[80px] text-slate-800 flex justify-center gap-6 items-center border-t-[1.5px]'>
@@ -46,29 +53,22 @@ function Paginator({totalPages,
             }
         </div>
 
-        
+        <div>
+            <label htmlFor="itemsPerPage">Rows Per Page:</label>
+                <select className='px-3  py-2 border rounded-md ml-2' 
+                        id="itemsPerPage" 
+                        value={itemPerPage}
+                        onChange={handelChangeItemPerPage}>
+                    {[6, 10, 15, 20, 25, 30, 35, 40, 45, 50].map((value) => (
+                        <option
+                                key={value} value={value}>
+                                {value}
+                        </option>
+                    ))}
+                </select>
 
-
-       
-
-
-        {/* {
-            pageNumbers.map((page, index) => {
-                <div key={index}>
-                    <p className='text-white'>{currentPage}</p>
-                    <p className='text-white'>{page}</p>
-                <button 
-                 key={page}
-                        onClick={() => onPageChange(page)}
-                        className={` bg-white px-4 py-2 ${currentPage === page ? 'bg-slate-600' : ' '}`} >
-                            Next
-                </button>
-               
-                </div>
-
-
-            })
-        } */}
+        </div>
+   
     </div>
   )
 }
